@@ -1,0 +1,161 @@
+package GUIs;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import estoque.Conexao;
+
+
+
+public class Update extends JFrame {
+
+	
+	private JPanel painel;
+	private DefaultTableModel modelo = new DefaultTableModel();
+	private JTextField antesDoUpdate;
+	private JTextField depoisDoUpdate;
+	
+	public static void main() {
+		Update teste = new Update();
+		teste.criaJanela();
+		teste.setLocationRelativeTo(null);
+		teste.setVisible(true);
+	}
+	
+	public Update() {
+		super("ATUALIZAR ESTOQUE");
+		criaJanela();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setContentPane(painel);
+		
+		// legenda geral
+		JLabel lblNewLabel = new JLabel("EDITAR PRODUTOS: ");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblNewLabel.setBounds(110, 11, 389, 14);
+		painel.add(lblNewLabel);
+		
+		// botão para confirmar a ação
+		JButton botao = new JButton("EXECUTAR");
+		botao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Connection con = Conexao.getConnection();
+				
+				String categoriaNew = "id";
+				String valorNew = "02";
+				
+				String categoriaOld = "setor";
+				String valorOld = " ";
+				
+				
+				String sql = "update produtos set " + categoriaNew + " = " + valorNew +  " where " + categoriaOld + " = " + '"'+valorOld + '"';
+				PreparedStatement st;
+				
+				
+				try {
+					st = con.prepareStatement(sql);
+					st.executeUpdate();
+					
+					st.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				JOptionPane.showMessageDialog(null, "DADOS ATUALIZADOS COM SUCESSO", "", -1);
+				
+				
+				
+				
+			}
+			
+			
+		});
+		
+		botao.setBounds(120, 130, 118, 20);
+		painel.add(botao);
+
+	
+		
+				
+				
+				
+				
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public void criaJanela() {
+		painel = new JPanel();
+		painel.setLayout(null);
+		setBounds(100, 100, 376, 194);
+		
+		// --------- CRIAÇÃO DOS COMPONENTES ------------ //
+		
+				// LEGENDA
+				JLabel legendaAntes = new JLabel("ONDE O ");
+				legendaAntes.setForeground(Color.RED);
+				legendaAntes.setFont(new Font("Arial", Font.PLAIN, 10));
+				legendaAntes.setBounds(10, 76, 389, 14);
+				painel.add(legendaAntes);
+				
+				// CAIXA DE SELEÇÃO
+				JComboBox coluna = new JComboBox();
+				coluna.setModel(new DefaultComboBoxModel(new String[] {"id", "setor", "modelo", "tamanho", "cor"}));
+				coluna.setBounds(55, 75, 90, 18);
+				painel.add(coluna);
+				
+				// LEGENDA
+				JLabel legendaIgual = new JLabel(" FOR IGUAL A");
+				legendaIgual.setForeground(Color.RED);
+				legendaIgual.setFont(new Font("Arial", Font.PLAIN, 10));
+				legendaIgual.setBounds(165, 75, 70, 18);
+				painel.add(legendaIgual);
+				
+				// CAIXA PARA DIGITAR
+				antesDoUpdate = new JTextField();
+				antesDoUpdate.setBounds(250, 75, 100, 18);
+				painel.add(antesDoUpdate);
+				antesDoUpdate.setColumns(10);
+		
+				// ------------------------------------------------- //
+				
+				// LEGENDA
+				JLabel legendaDepois = new JLabel("O(A)");
+				legendaDepois.setForeground(Color.RED);
+				legendaDepois.setFont(new Font("Arial", Font.PLAIN, 10));
+				legendaDepois.setBounds(10, 100, 389, 14);
+				painel.add(legendaDepois);
+				
+				// CAIXA DE SELEÇÃO
+				JComboBox coluna2 = new JComboBox();
+				coluna2.setModel(new DefaultComboBoxModel(new String[] {"id", "setor", "modelo", "tamanho", "cor"}));
+				coluna2.setBounds(55, 100, 90, 18);
+				painel.add(coluna2);
+				
+				// LEGENDA
+				JLabel legendaIgual2 = new JLabel(" VAI SER: ");
+				legendaIgual2.setForeground(Color.RED);
+				legendaIgual2.setFont(new Font("Arial", Font.PLAIN, 10));
+				legendaIgual2.setBounds(165, 100, 92, 18);
+				painel.add(legendaIgual2);
+				
+				// CAIXA PARA DIGITAR
+				depoisDoUpdate = new JTextField();
+				depoisDoUpdate.setBounds(250, 100, 100, 18);
+				painel.add(depoisDoUpdate);
+				depoisDoUpdate.setColumns(10);
+				
+		
+		
+	}
+	
+	
+}

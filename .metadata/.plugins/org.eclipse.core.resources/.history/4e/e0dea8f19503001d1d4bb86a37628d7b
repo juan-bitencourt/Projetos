@@ -1,0 +1,50 @@
+package estoque00;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// the methods are going to join here
+public class Main {
+
+	public static void main(String[] args) {
+			// Comandos.inserir();
+			// Comandos.excluir();
+			// Comandos.atualizar();
+		// VER COMO FAZ PARA ARMAZENAR CADA RESULTADO OBTIDO DO FOR LOOP
+		
+		
+		String[] tabelas = {"o setor", "o modelo", "o tamanho", "a cor", "o preco", "quantas comprou"};
+		
+		ArrayList<String> results = new ArrayList<String>();
+		
+		Scanner teste = new Scanner(System.in);
+		
+		for (int i = 0; i < tabelas.length; i++) {
+		System.out.println("Digite " + tabelas[i]);
+	
+		results.add(teste.nextLine());
+	
+		}
+		
+		System.out.println(results);
+		teste.close();
+//			 while(resultado.next()){ //o método next() retorna true caso haja mais linhas
+//				 
+//			      System.out.print(resultado.getInt("id")+"\t");
+//			      System.out.print(resultado.getString("setor")+"\t");
+//			      System.out.print(resultado.getString("modelo")+"\t");
+//			      System.out.print(resultado.getString("tamanho")+"\t");
+//			      System.out.print(resultado.getString("cor")+"\t");
+//			      System.out.print(resultado.getFloat("preco")+"\t");
+//			      System.out.println(resultado.getInt("estoque"));
+			      
+			   
+		
+		
+		
+		
+		
+		
+	}
+
+}
